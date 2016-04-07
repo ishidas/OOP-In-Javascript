@@ -132,6 +132,6 @@ var zombie1 = new Characters.Zombie('Zombi1', 'acid reflects and spits out stoma
 // newRabbit.attack(zombie1);
 console.log(Characters);
 newRabbit.pickUpItem(item1);
-module.exports = Characters;
+window.exports = Characters;
 
 })()
