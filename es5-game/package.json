@@ -1,0 +1,19 @@
+{
+  "name": "oop-in-js",
+  "version": "1.0.0",
+  "description": "Creating text base game using es5 and es6",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ishidas/OOP-In-Javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ishidas/OOP-In-Javascript/issues"
+  },
+  "homepage": "https://github.com/ishidas/OOP-In-Javascript#readme"
+}
