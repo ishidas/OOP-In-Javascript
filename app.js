@@ -3,9 +3,10 @@
 //*************************//
 
 // Animal constructor has all the methods and Zombie is inheriting those methods from Animal constructor
-
+(function(){
+var Characters = {}
 //Animal Constructor
-function Animal (name, ability, armor, strengthIndex){
+Characters.Animal = function (name, ability, armor, strengthIndex){
   this.name = name
   this.ability = ability
   this.armor = armor
@@ -32,7 +33,7 @@ function Animal (name, ability, armor, strengthIndex){
 }
 
 
-Animal.prototype.attack = function(enemy){
+Characters.Animal.prototype.attack = function(enemy){
   var dext = this.strength[this.strengthIndex].dexterity
   var dmg = this.strength[this.strengthIndex].damage;
   if(dext === 50){
@@ -67,7 +68,7 @@ Animal.prototype.attack = function(enemy){
   }
 }
 
-Animal.prototype.damageTaken = function(damage){
+Characters.Animal.prototype.damageTaken = function(damage){
   this.strengthIndex -= 1
   var dext = this.strength[this.strengthIndex].dexterity;
   this.hp -= damage;
@@ -75,14 +76,14 @@ Animal.prototype.damageTaken = function(damage){
   console.log(this.name + ' dexterity is now at ' + dext + '.')
 }
 
-Animal.prototype.pickUpItem = function(item){
+Characters.Animal.prototype.pickUpItem = function(item){
   console.log(this.name + ' found ' + item.name + 'and its ability is ' + item.ability);
   this.hp += item.upHp
   this.hp += item.upDext
   console.log('The ' + item.name + ' affected ' + this.name + ' now has ' + this.hp + ' , ' + this.strength[this.strengthIndex].dexterity)
 }
 //Zombie Constructor
-function Zombie (name, ability, strengthIndex) {
+Characters.Zombie = function (name, ability, strengthIndex) {
   this.name = name
   this.ability = ability
   this.strength = [
@@ -101,7 +102,7 @@ function Zombie (name, ability, strengthIndex) {
 }
 
 //Item constructor
-function Item(name, color, ability, upHp, upDext){
+Characters.Item = function (name, color, ability, upHp, upDext){
 var randomNum;
 console.log('Random Num is ' + randomNum);
 this.name = name
@@ -111,16 +112,16 @@ this.upHp = upHp
 this.upDext = upDext
 }
 
-var item1 = new Item('Ruby', 'Red', 'up HP by 2', 2, 0);
+var item1 = new Characters.Item('Ruby', 'Red', 'up HP by 2', 2, 0);
 console.log(item1);
 //Zombie constructor is inheriting methods from Animal Here
 //both ways work! Zombie.prototype = new Animal(); or below:
-Zombie.prototype = Animal.prototype;
+Characters.Zombie.prototype = Characters.Animal.prototype;
 
 
 //creating and console logging instances of Animal and Zombie
-var newRabbit = new Animal('Rabbit the Jumper', 'Super Kick', 'Fluffy Fur is like a air bag', 4);
-var zombie1 = new Zombie('Zombi1', 'acid reflects and spits out stomach acid', 2);
+var newRabbit = new Characters.Animal('Rabbit the Jumper', 'Super Kick', 'Fluffy Fur is like a air bag', 4);
+var zombie1 = new Characters.Zombie('Zombi1', 'acid reflects and spits out stomach acid', 2);
 // console.log(newRabbit);
 // console.log(zombie1);
 
@@ -129,4 +130,8 @@ var zombie1 = new Zombie('Zombi1', 'acid reflects and spits out stomach acid', 2
 // zombie1.attack(newRabbit);
 // zombie1.attack(newRabbit);
 // newRabbit.attack(zombie1);
+console.log(Characters);
 newRabbit.pickUpItem(item1);
+module.exports = Characters;
+
+})()
