@@ -4,8 +4,6 @@
 //*************************//
 
 // Animal constructor has all the methods and Zombie is inheriting those methods from Animal constructor
-// (function(){
-// let  = {}
 //Animal Constructor
 class Animal {
     constructor (name, ability, armor, strengthIndex){
@@ -35,9 +33,9 @@ class Animal {
   }
 
 
-  attack (enemy){
-    let dext = this._strength[this._strengthIndex]._dexterity
-    let dmg = this._strength[this._strengthIndex]._damage;
+   attack (enemy){
+    var dext = this._strength[this._strengthIndex].dexterity;
+    var dmg = this._strength[this._strengthIndex].damage;
     if(dext === 50){
       alert(this._name + ' attacked the opponent in his neck using his ' + this._ability + ' ! Gave ' + enemy._name + ' a fatal ' + dmg + ' damage!!')
       enemy.damageTaken(dmg);
@@ -75,7 +73,7 @@ class Animal {
     let dext = this._strength[this._strengthIndex]._dexterity;
     this._hp -= damage;
     alert('Zombie took a damage of ' + damage + ' and Zombie hp is at ' + this._hp + '.');
-    alert(this._name + ' dexterity is now at ' + dext + '.')
+    alert(this._name + ' dexterity is now at ' + dext  + '.')
     journey2();
   }
 
@@ -88,24 +86,31 @@ class Animal {
 }
 //Zombie Constructor
 class Zombie extends Animal {
-    constructor (name, ability, strengthIndex) {
+    constructor (name, ability,strengthIndex) {
       super(name, ability, strengthIndex)
-    // this._name = name
-    // this._ability = ability
-    // this._strength = [
-    //                   {dexterity: 10,
-    //                     damage: 2
-    //                   },
-    //                   {dexterity: 20,
-    //                     damage: 4
-    //                   },
-    //                   {dexterity: 30,
-    //                     damage: 6
-    //                   }
-    //                 ]
+    this._name = name
+    this._ability = ability
+    this._strength = [
+                      {dexterity: 10,
+                        damage: 2
+                      },
+                      {dexterity: 20,
+                        damage: 4
+                      },
+                      {dexterity: 30,
+                        damage: 6
+                      }
+                    ]
     this._hp = 10
-    // this._strengthIndex = strengthIndex;
+    this._strengthIndex = strengthIndex;
   }
+   attack(enemy){
+     return super.attack(enemy)
+  }
+  damageTaken(damage){
+    return super.damageTaken(damage)
+  }
+
 }
 //Item constructor
 class Item {
@@ -117,23 +122,20 @@ class Item {
     this._upDext = upDext
   }
 }
-let item1 = new Item('Ruby', 'Red', 'up HP by 2', 2, 0);
-console.log(item1);
-//Zombie constructor is inheriting methods from Animal Here
-//both ways work! Zombie.prototype = new Animal(); or below:
-// Zombie.prototype = Animal.prototype;
 
 
-//creating and console logging instances of Animal and Zombie
+//creating and console logging instances of Animal, Zombie and item
 let newRabbit = new Animal('Rabbit the Jumper', 'Super Kick', 'Fluffy Fur is like a air bag', 4);
 let zombie1 = new Zombie('Zombi1', 'acid reflects and spits out stomach acid', 2);
 let zombie2 = new Zombie('Zombi2', 'acid reflects and spits out stomach acid', 2);
+let item1 = new Item('Ruby', 'Red', 'up HP by 2', 2, 0);
 // console.log(newRabbit);
 // console.log(zombie1);
+// console.log(item1);
 
 
 //Actions!!
-let intro = prompt('Once upon a time, there was a cursed cave in a small village of Zooland. One of the villagers, a rat named Ratter, went inside of the cave and he was cursed and became a zombie. He started an epidemic of Zombie all over the village. A righteous Bunny, called Rabbit the Jumper, quickly adopted to the situation and became a super animal. Hopefully, Rabbit the Jumper can save the village. DO YOU WANN SAVE a village?').toLowerCase();
+var intro = prompt('Once upon a time, there was a cursed cave in a small village of Zooland. One of the villagers, a rat named Ratter, went inside of the cave and he was cursed and became a zombie. He started an epidemic of Zombie all over the village. A righteous Bunny, called Rabbit the Jumper, quickly adopted to the situation and became a super animal. Hopefully, Rabbit the Jumper can save the village. DO YOU WANN SAVE a village?').toLowerCase();
 switch(intro, journey1){
   case 'yes':
     alert('Great! Let\'s begin!');
@@ -144,12 +146,10 @@ switch(intro, journey1){
 var journey1 = prompt('You see a zombie1 approaching to you. What do you do? ATTACK, PICKUP item just becasue it\'s there, or GET attacked by a Zombie? ').toLowerCase();
 switch(journey1){
   case 'attack':
-    newRabbit.attack(zombie1);
-    journey2();
+    newRabbit.attack(zombie1)
     break;
   case 'pickup':
     newRabbit.pickUpItem(item1)
-    journey2();
     break;
   case 'get':
     zombie2.attack(newRabbit)
@@ -162,5 +162,3 @@ switch(journey1){
 // console.log();
 // newRabbit.pickUpItem(item1);
 // window.exports = ;
-
-// })()
